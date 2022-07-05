@@ -24,7 +24,8 @@ class MainActivity : AppCompatActivity(),HomeContract.IHomeView {
         val presenter = HomePresenter(this)
 
         btnLogin.setOnClickListener{
-            presenter.toCompare(editTextAccount.text.toString(),editTextPassword.text.toString())
+//            presenter.toCompare(editTextAccount.text.toString(),editTextPassword.text.toString())
+            presenter.getUsers()
         }
 
 
@@ -40,11 +41,5 @@ class MainActivity : AppCompatActivity(),HomeContract.IHomeView {
     }
 
 
-//    fun showSuccess(){
-//        Toast.makeText(this,"success",Toast.LENGTH_SHORT).show()
-//    }
-//
-//    fun showFail(){
-//        Toast.makeText(this,"fail",Toast.LENGTH_SHORT).show()
-//    }
+//    fun showSuccess(
 }

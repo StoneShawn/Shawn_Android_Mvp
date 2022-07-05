@@ -6,6 +6,7 @@ interface HomeContract {
 
     interface IHomePresenter{
         fun toCompare(account: String,password: String)
+        fun getUsers()
     }
 
     interface IHomeView {
