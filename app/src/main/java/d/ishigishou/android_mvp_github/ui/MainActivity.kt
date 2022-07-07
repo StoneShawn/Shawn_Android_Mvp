@@ -12,32 +12,33 @@ import d.ishigishou.android_mvp_github.contract.HomeContract
 import d.ishigishou.android_mvp_github.model.bean.UserListResult
 import d.ishigishou.android_mvp_github.presenter.HomePresenter
 import d.ishigishou.android_mvp_github.ui.adapter.HomeAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity(),HomeContract.IHomeView, SwipeRefreshLayout.OnRefreshListener {
+class MainActivity : BaseActivity(), HomeContract.IHomeView, SwipeRefreshLayout.OnRefreshListener {
 
-    private lateinit var refreshLayout: SwipeRefreshLayout
-    private lateinit var recyclerView: RecyclerView
-
-    private var isRefresh: Boolean = true
 
     /**
      * 懶加載Presenter
      */
     private val mPresenter by lazy { HomePresenter() }
-    private var mUserList = ArrayList<UserListResult>()
+    private val mAdapter by lazy { HomeAdapter(this, mUserList, R.layout.item_user) }
 
-    private val mAdapter by lazy { HomeAdapter(this,mUserList,R.layout.item_user) }
+
+    private var mUserList = ArrayList<UserListResult>()
+    private var isRefresh: Boolean = true
+    private var currentPage: Int = 20
+
+    /**
+     * RecyclerView LoadMore
+     */
+    private var itemCount: Int = 0
+    private var lastPosition: Int = 0
+    private var lastItemCount: Int = 0
+    lateinit var lastPositionData: UserListResult
+
 
     init {
         mPresenter.attachView(this)
-
-    }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-
-
 
     }
 
@@ -46,8 +47,7 @@ class MainActivity : BaseActivity(),HomeContract.IHomeView, SwipeRefreshLayout.O
     }
 
     override fun initData() {
-        refreshLayout = findViewById(R.id.refreshLayout)
-        recyclerView = findViewById(R.id.recyclerView)
+
         refreshLayout.isRefreshing = true
         refreshLayout.setOnRefreshListener(this)
     }
@@ -56,26 +56,45 @@ class MainActivity : BaseActivity(),HomeContract.IHomeView, SwipeRefreshLayout.O
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = mAdapter
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val linearManager = recyclerView.layoutManager as LinearLayoutManager
+
+                itemCount = linearManager.itemCount
+                lastPosition = linearManager.findLastCompletelyVisibleItemPosition()
+
+                if (lastItemCount != itemCount && lastPosition == itemCount - 1) {
+                    lastItemCount = itemCount
+
+                    if (lastItemCount < 100) {
+                        isRefresh = false
+                        getLoadMoreData()
+                    }
+                }
+            }
+        })
 
     }
 
     override fun start() {
-        mPresenter.getUsers()
+        mPresenter.getUsers(0, currentPage)
     }
 
     override fun showUserListData(userList: ArrayList<UserListResult>) {
-
-        if(isRefresh){
+        mUserList.addAll(userList)
+        lastPositionData = userList[userList.size-1]
+        if (isRefresh) {
             mAdapter.setData(userList)
             refreshLayout.isRefreshing = false
-        }else{
+        } else {
             mAdapter.addData(userList)
             refreshLayout.isRefreshing = false
         }
     }
 
     override fun showFail() {
-        Toast.makeText(this,"fail",Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "fail", Toast.LENGTH_SHORT).show()
     }
 
     override fun showLoading() {
@@ -87,9 +106,11 @@ class MainActivity : BaseActivity(),HomeContract.IHomeView, SwipeRefreshLayout.O
 
     override fun onRefresh() {
         isRefresh = true
-        mPresenter.getUsers()
+        mPresenter.getUsers(0, currentPage)
     }
 
+    fun getLoadMoreData(){
+        mPresenter.getUsers(lastPositionData.id, currentPage)
+    }
 
-//    fun showSuccess(
 }

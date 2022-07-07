@@ -9,8 +9,7 @@ interface HomeContract {
 
 
     interface IHomePresenter: IPresenter<IHomeView>{
-        fun toCompare(account: String,password: String)
-        fun getUsers()
+        fun getUsers(since: Int,page: Int)
     }
 
     interface IHomeView: IBaseView {

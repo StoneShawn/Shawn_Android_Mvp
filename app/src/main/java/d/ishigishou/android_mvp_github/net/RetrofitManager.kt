@@ -71,6 +71,7 @@ object RetrofitManager {
 
 //        val cacheFile = File(MyApplication.context.cacheDir, "cache")
 //        val cache = Cache(cacheFile, 1024 * 1024 * 50) //50Mb 缓存的大小
+
         return OkHttpClient.Builder()
             .addInterceptor(addHeaderInterceptor())
             .addInterceptor(httpLoggingInterceptor)

@@ -20,22 +20,8 @@ class HomePresenter: BasePresenter<HomeContract.IHomeView>(),HomeContract.IHomeP
     }
 
 
-    override fun toCompare(account: String, password: String) {
-        if(account == "1234" && password =="5678"){
-            //ToDo 須通知顯示成功HomeActivity
-            mRootView?.apply {
-
-            }
-        }else{
-            //Todo 須通知HomeActivity 顯示失敗
-            mRootView?.apply {
-                showFail()
-            }
-        }
-    }
-
-    override fun getUsers() {
-        val disposable = homeModel.getUserList()
+    override fun getUsers(since: Int, page: Int) {
+        val disposable = homeModel.getUserList(since,page)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
@@ -43,5 +29,7 @@ class HomePresenter: BasePresenter<HomeContract.IHomeView>(),HomeContract.IHomeP
                     showUserListData(it)
                 }
             }
+
+        addSubscription(disposable)
     }
 }

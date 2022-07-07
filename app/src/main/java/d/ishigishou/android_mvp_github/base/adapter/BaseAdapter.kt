@@ -42,11 +42,11 @@ abstract class BaseAdapter<T>(var mContext: Context, var mData: ArrayList<T>, pr
         //綁定資料
         bindData(holder,mData[position],position)
 
-        mItemClickListener.let {
+        mItemClickListener?.let {
             holder.itemView.setOnClickListener{ mItemClickListener!!.onItemClick(mData[position],position)}
         }
 
-        mItemLongClickListener.let {
+        mItemLongClickListener?.let {
             holder.itemView.setOnLongClickListener{ mItemLongClickListener!!.onItemLongClick(mData[position],position)}
         }
     }
@@ -63,4 +63,15 @@ abstract class BaseAdapter<T>(var mContext: Context, var mData: ArrayList<T>, pr
      * @param position
      */
     protected abstract fun bindData(holder: ViewHolder,data: T,position: Int)
+
+
+    fun setOnItemClickListener(itemClickListener: OnItemClickListener) {
+        this.mItemClickListener = itemClickListener
+    }
+
+    fun setOnItemLongClickListener(itemLongClickListener: OnItemLongClickListener) {
+        this.mItemLongClickListener = itemLongClickListener
+    }
+
+    
 }

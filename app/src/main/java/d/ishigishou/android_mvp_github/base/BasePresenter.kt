@@ -1,6 +1,7 @@
 package d.ishigishou.android_mvp_github.base
 
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 
 open class BasePresenter<T : IBaseView>: IPresenter<T> {
 
@@ -23,8 +24,9 @@ open class BasePresenter<T : IBaseView>: IPresenter<T> {
 
     }
 
-//    private val isViewAttached : Boolean
-//        get() = mRootView !=null
-//
-//
+    fun addSubscription(disposable: Disposable) {
+        compositeDisposable.add(disposable)
+    }
+
+
 }
