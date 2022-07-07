@@ -2,11 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="d.ishigishou.android_mvp_github">
-
-    <!--權限設定-->
+    <!-- 權限設定 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <!--網路權限-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 網路權限 -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -19,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Android_Mvp_Github"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.UserDetailActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">
