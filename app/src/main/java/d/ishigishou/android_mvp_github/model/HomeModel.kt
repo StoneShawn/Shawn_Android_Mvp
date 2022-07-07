@@ -8,7 +8,7 @@ class HomeModel {
 
 
 
-    fun getUserList(): Observable<ArrayList<UserListResult>>{
-        return RetrofitManager.service.getUsers(0,3)
+    fun getUserList(since: Int,page: Int): Observable<ArrayList<UserListResult>>{
+        return RetrofitManager.service.getUsers(since,page)
     }
 }
