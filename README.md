@@ -17,5 +17,6 @@
 
 # DEMO 
 
-![Demo-Home](https://user-images.githubusercontent.com/54303580/177710673-d58ac852-915a-45da-8037-4151ed0c2756.gif)
-![Demo-click](https://user-images.githubusercontent.com/54303580/177712772-a787d26a-be4f-4e4f-903e-4aa58e057623.gif)
+
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/54303580/177715457-f50bd7ee-b4e5-4bdb-9f0c-014b4538e204.gif)
+
