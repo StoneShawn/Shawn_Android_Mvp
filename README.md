@@ -17,4 +17,5 @@
 
 # DEMO 
 
-![Demo-Home](https://user-images.githubusercontent.com/54303580/177710673-d58ac852-915a-45da-8037-4151ed0c2756.gif =250x250)
+![Demo-Home](https://user-images.githubusercontent.com/54303580/177710673-d58ac852-915a-45da-8037-4151ed0c2756.gif)
+![Demo-click](https://user-images.githubusercontent.com/54303580/177712772-a787d26a-be4f-4e4f-903e-4aa58e057623.gif)
