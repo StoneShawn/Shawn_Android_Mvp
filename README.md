@@ -17,4 +17,4 @@
 
 # DEMO 
 
-![Demo-Home](https://user-images.githubusercontent.com/54303580/177710673-d58ac852-915a-45da-8037-4151ed0c2756.gif)
+![Demo-Home](https://user-images.githubusercontent.com/54303580/177710673-d58ac852-915a-45da-8037-4151ed0c2756.gif){:height="50%" width="50%"}
